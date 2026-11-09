@@ -1,0 +1,157 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  align-items: stretch;
+  padding: 0 32px;
+  background: rgba(42, 18, 78, 0.92);
+  border-bottom: 1px solid rgba(191, 148, 255, 0.16);
+  box-shadow: 0 8px 28px rgba(10, 5, 20, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 16px 12px 0;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.logo::after,
+.header-nav a::after {
+  position: absolute;
+  top: -1px;
+  right: 0;
+  width: 5px;
+  height: calc(100% + 2px);
+  background: linear-gradient(180deg, #7137b8, #482174);
+  transform: skewX(-20deg);
+  content: '';
+  opacity: 0.58;
+}
+
+.logo img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.header-nav {
+  grid-column: span 4;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.header-nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 18px 12px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  isolation: isolate;
+  transition:
+    color 160ms ease,
+    text-shadow 160ms ease;
+}
+
+.header-nav a::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(42, 18, 78, 0.3), rgba(42, 18, 78, 0.3)),
+    url('../assets/cherep.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto, contain;
+  content: '';
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.header-nav a:hover {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+.header-nav a:hover::before,
+.header-nav a:focus-visible::before {
+  opacity: 1;
+}
+
+.header-nav a > span {
+  position: relative;
+  z-index: 1;
+  transition: font-size 180ms ease;
+}
+
+.header-nav a:hover > span,
+.header-nav a:focus-visible > span {
+  font-size: 1.08em;
+  -webkit-text-stroke: 1px #000;
+  paint-order: stroke fill;
+}
+
+.header-nav a:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: -2px;
+}
+
+@media (max-width: 800px) {
+  .header {
+    grid-template-columns: 1.8fr repeat(4, minmax(0, 1fr)) 0.3fr;
+    padding: 0 10px;
+  }
+
+  .header-nav {
+    grid-column: span 4;
+  }
+
+  .logo {
+    gap: 4px;
+    padding: 8px 8px 8px 0;
+    font-size: 22px;
+  }
+
+  .logo img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-nav a {
+    padding: 12px 4px;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+
+  .header-nav a::after {
+    width: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-nav a::before {
+    transition: none;
+  }
+}

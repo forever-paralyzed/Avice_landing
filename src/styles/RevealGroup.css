@@ -1,0 +1,48 @@
+.reveal-group .mainPage-stripe,
+.reveal-group .mainPage-ribbon,
+.reveal-group .about-stripe,
+.reveal-group .about-ribbon {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.reveal-group.is-visible .mainPage-stripe,
+.reveal-group.is-visible .mainPage-ribbon,
+.reveal-group.is-visible .about-stripe,
+.reveal-group.is-visible .about-ribbon {
+  opacity: 1;
+}
+
+.reveal-group .clips h2,
+.reveal-group .clips > h3,
+.reveal-group .clip-card-title,
+.reveal-group .socials h2 {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
+}
+
+.reveal-group.is-visible .clips h2,
+.reveal-group.is-visible .clips > h3,
+.reveal-group.is-visible .clip-card-title,
+.reveal-group.is-visible .socials h2 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-group .mainPage-stripe,
+  .reveal-group .mainPage-ribbon,
+  .reveal-group .about-stripe,
+  .reveal-group .about-ribbon,
+  .reveal-group .clips h2,
+  .reveal-group .clips > h3,
+  .reveal-group .clip-card-title,
+  .reveal-group .socials h2 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

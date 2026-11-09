@@ -1,0 +1,142 @@
+.mainPage {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.mainPage-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 65%;
+  z-index: 0;
+}
+
+.mainPage-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 20% center;
+}
+
+.mainPage-ribbon,
+.mainPage-stripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 61%;
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+}
+
+.mainPage-ribbon {
+  background: linear-gradient(145deg, rgba(191, 148, 255, 0.6), rgba(76, 29, 149, 0.6));
+  transform: translate(18px, 12px);
+  z-index: 1;
+}
+
+.mainPage-stripe {
+  background: var(--primary);
+  z-index: 2;
+}
+
+.mainPage-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 58%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #3b1a7a 0%, #1b0a45 100%);
+  clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+  z-index: 3;
+}
+
+.mainPage-text {
+  padding-left: clamp(24px, 8vw, 140px);
+}
+
+.mainPage-label {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+}
+
+.mainPage h1 {
+  margin: 8px 0 16px;
+  font-size: clamp(56px, 9vw, 120px);
+  line-height: 1;
+}
+
+.mainPage-desc {
+  max-width: 480px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.mainPage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+/* кнопки на фиолетовом фоне: светлые, иначе сольются */
+.mainPage .btn-primary {
+  background: #fff;
+  color: #4c1d95;
+}
+
+.mainPage .btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.25);
+}
+
+.mainPage .btn-outline {
+  border-color: #fff;
+  color: #fff;
+}
+
+.mainPage .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 800px) {
+  .mainPage {
+    min-height: auto;
+  }
+  .mainPage-image {
+    position: relative;
+    width: 100%;
+    height: 45vh;
+  }
+  .mainPage-ribbon,
+  .mainPage-stripe {
+    display: none;
+  }
+  .mainPage-panel {
+    position: relative;
+    width: 100%;
+    clip-path: none;
+    padding: 40px 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mainPage-text {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1100px) {
+  .mainPage-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+}
