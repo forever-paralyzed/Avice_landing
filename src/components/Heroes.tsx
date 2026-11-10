@@ -85,7 +85,7 @@ function Heroes() {
           <article
             key={activeHero.name}
             id="heroes-slide"
-            className={`heroes-feature${hasChangedSlide ? ` heroes-feature--${slideDirection}` : ''}`}
+            className={`heroes-feature${hasChangedSlide ? ` heroes-feature--${slideDirection}` : ''}${activeHero.description.length > 220 ? ' heroes-feature--long-description' : ''}`}
             style={{ '--hero-theme': activeHero.theme } as HeroThemeStyle}
             role="group"
             aria-roledescription="слайд"
@@ -97,7 +97,7 @@ function Heroes() {
                   className="heroes-feature-image"
                   src={activeHero.image}
                   srcSet={activeHero.imageSrcSet}
-                  sizes="(max-width: 600px) calc(100vw - 38px), (max-width: 800px) 51vw, min(48vw, 614px)"
+                  sizes="(max-width: 600px) calc(100vw - 36px), (max-width: 800px) 54vw, (max-width: 1328px) 48vw, 614px"
                   alt={activeHero.name}
                   loading="lazy"
                   decoding="async"

@@ -41,7 +41,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(320px, 42%);
   align-items: center;
   gap: clamp(24px, 4vw, 56px);
-  min-height: clamp(520px, 66vh, 700px);
+  height: clamp(520px, 66vh, 700px);
   padding: clamp(50px, 8vw, 120px);
   box-sizing: border-box;
   overflow: hidden;
@@ -100,26 +100,13 @@
   pointer-events: none;
 }
 
-.heroes-feature-visual::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    #17121f 0%,
-    rgba(23, 18, 31, 0.78) 15%,
-    rgba(23, 18, 31, 0.08) 62%,
-    transparent 100%
-  );
-  content: '';
-}
-
 .heroes-feature-image {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.88) drop-shadow(0 12px 20px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.3));
 }
 
 .heroes-feature-art {
@@ -193,10 +180,14 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 20px;
+  margin: 0.55em 0 20px;
   color: #fff;
   font-size: clamp(38px, 6vw, 64px);
   line-height: 1.05;
+}
+
+.heroes-feature--long-description h3 {
+  margin-top: 0.2em;
 }
 
 .heroes-feature-description {
@@ -320,7 +311,7 @@
   .heroes-feature {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
-    min-height: auto;
+    height: clamp(520px, 72vh, 680px);
     padding: 28px;
   }
 
@@ -334,15 +325,6 @@
     width: 54%;
   }
 
-  .heroes-feature-visual::after {
-    background: linear-gradient(
-      90deg,
-      #17121f 0%,
-      rgba(23, 18, 31, 0.78) 10%,
-      rgba(23, 18, 31, 0.08) 70%,
-      transparent 100%
-    );
-  }
 }
 
 @media (max-width: 600px) {
@@ -358,6 +340,7 @@
   .heroes-feature {
     border-radius: 18px;
     gap: 14px;
+    height: clamp(520px, 82vh, 700px);
     padding: 18px 12px;
   }
 
@@ -367,12 +350,6 @@
 
   .heroes-feature-visual {
     width: 100%;
-  }
-
-  .heroes-feature-visual::after {
-    background:
-      linear-gradient(90deg, rgba(23, 18, 31, 0.84), rgba(23, 18, 31, 0.38)),
-      linear-gradient(0deg, #17121f 0%, transparent 68%);
   }
 
   .heroes-feature-copy {

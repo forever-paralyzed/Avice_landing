@@ -1,21 +1,39 @@
-import emberImageSmall from '../assets/heroes/ember-480.webp';
-import emberImageLarge from '../assets/heroes/ember-693.webp';
-import invokerImageSmall from '../assets/heroes/invo-480.webp';
-import invokerImageLarge from '../assets/heroes/invo-960.webp';
-import meepoImageSmall from '../assets/heroes/meepo-320.webp';
-import meepoImageLarge from '../assets/heroes/meepo-480.webp';
-import morphlingImageSmall from '../assets/heroes/morph-480.webp';
-import morphlingImageLarge from '../assets/heroes/morph-960.webp';
+import emberImageSmall from '../assets/heroes/ember_spirit-480.webp';
+import emberImageMedium from '../assets/heroes/ember_spirit-720.webp';
+import emberImageLarge from '../assets/heroes/ember_spirit-960.webp';
+import emberImageFull from '../assets/heroes/ember_spirit-1440.webp';
+import invokerImageSmall from '../assets/heroes/invoker-480.webp';
+import invokerImageMedium from '../assets/heroes/invoker-720.webp';
+import invokerImageLarge from '../assets/heroes/invoker-960.webp';
+import invokerImageFull from '../assets/heroes/invoker-1440.webp';
+import meepoImageSmall from '../assets/heroes/meepo-480.webp';
+import meepoImageMedium from '../assets/heroes/meepo-720.webp';
+import meepoImageLarge from '../assets/heroes/meepo-960.webp';
+import meepoImageFull from '../assets/heroes/meepo-1440.webp';
+import morphlingImageSmall from '../assets/heroes/morphling-480.webp';
+import morphlingImageMedium from '../assets/heroes/morphling-720.webp';
+import morphlingImageLarge from '../assets/heroes/morphling-960.webp';
+import morphlingImageFull from '../assets/heroes/morphling-1440.webp';
 import puckImageSmall from '../assets/heroes/puck-480.webp';
+import puckImageMedium from '../assets/heroes/puck-720.webp';
 import puckImageLarge from '../assets/heroes/puck-960.webp';
-import queenOfPainImageSmall from '../assets/heroes/qop-480.webp';
-import queenOfPainImageLarge from '../assets/heroes/qop-960.webp';
-import shadowFiendImageSmall from '../assets/heroes/sf-480.webp';
-import shadowFiendImageLarge from '../assets/heroes/sf-900.webp';
+import puckImageFull from '../assets/heroes/puck-1440.webp';
+import queenOfPainImageSmall from '../assets/heroes/queenofpain-480.webp';
+import queenOfPainImageMedium from '../assets/heroes/queenofpain-720.webp';
+import queenOfPainImageLarge from '../assets/heroes/queenofpain-960.webp';
+import queenOfPainImageFull from '../assets/heroes/queenofpain-1440.webp';
+import shadowFiendImageSmall from '../assets/heroes/nevermore-480.webp';
+import shadowFiendImageMedium from '../assets/heroes/nevermore-720.webp';
+import shadowFiendImageLarge from '../assets/heroes/nevermore-960.webp';
+import shadowFiendImageFull from '../assets/heroes/nevermore-1440.webp';
 import stormSpiritImageSmall from '../assets/heroes/storm_spirit-480.webp';
-import stormSpiritImageLarge from '../assets/heroes/storm_spirit-686.webp';
-import tinkerImageSmall from '../assets/heroes/tinker-320.webp';
-import tinkerImageLarge from '../assets/heroes/tinker-413.webp';
+import stormSpiritImageMedium from '../assets/heroes/storm_spirit-720.webp';
+import stormSpiritImageLarge from '../assets/heroes/storm_spirit-960.webp';
+import stormSpiritImageFull from '../assets/heroes/storm_spirit-1440.webp';
+import tinkerImageSmall from '../assets/heroes/tinker-480.webp';
+import tinkerImageMedium from '../assets/heroes/tinker-720.webp';
+import tinkerImageLarge from '../assets/heroes/tinker-960.webp';
+import tinkerImageFull from '../assets/heroes/tinker-1440.webp';
 
 export type Hero = {
   name: string;
@@ -45,69 +63,115 @@ const tinkerDescr =
 const puckDescr =
   'На Паке Артем в еще после введения аспектов в dota стал играть крайне редко. Как он сам отвечал на вопрос "почему не играешь на паке?" - "потому что не в кайф играть с крученой орбой", это был своеобразный аспект на героя к которому надо было привыкать, и который не нравился Стримеру.   '; // описание пака
 
+const responsiveHeroImage = (
+  small: string,
+  medium: string,
+  large: string,
+  full: string,
+) => ({
+  image: small,
+  imageSrcSet: `${small} 480w, ${medium} 720w, ${large} 960w, ${full} 1440w`,
+});
+
 export const heroes: Hero[] = [
   {
     name: 'Morphling',
     description: morphDescr,
     theme: '#00c3ff',
-    image: morphlingImageSmall,
-    imageSrcSet: `${morphlingImageSmall} 480w, ${morphlingImageLarge} 960w`,
+    ...responsiveHeroImage(
+      morphlingImageSmall,
+      morphlingImageMedium,
+      morphlingImageLarge,
+      morphlingImageFull,
+    ),
     featured: true,
   },
   {
     name: 'Shadow Fiend',
     description: sfDescr,
     theme: '#530000',
-    image: shadowFiendImageSmall,
-    imageSrcSet: `${shadowFiendImageSmall} 480w, ${shadowFiendImageLarge} 900w`,
+    ...responsiveHeroImage(
+      shadowFiendImageSmall,
+      shadowFiendImageMedium,
+      shadowFiendImageLarge,
+      shadowFiendImageFull,
+    ),
   },
   {
     name: 'Storm Spirit',
     description: stormDescr,
     theme: '#003de6',
-    image: stormSpiritImageSmall,
-    imageSrcSet: `${stormSpiritImageSmall} 480w, ${stormSpiritImageLarge} 686w`,
+    ...responsiveHeroImage(
+      stormSpiritImageSmall,
+      stormSpiritImageMedium,
+      stormSpiritImageLarge,
+      stormSpiritImageFull,
+    ),
   },
   {
     name: 'Invoker',
     description: invoDescr,
     theme: '#fb8eff',
-    image: invokerImageSmall,
-    imageSrcSet: `${invokerImageSmall} 480w, ${invokerImageLarge} 960w`,
+    ...responsiveHeroImage(
+      invokerImageSmall,
+      invokerImageMedium,
+      invokerImageLarge,
+      invokerImageFull,
+    ),
   },
   {
     name: 'Meepo',
     description: meepoDescr,
     theme: '#6f352a',
-    image: meepoImageSmall,
-    imageSrcSet: `${meepoImageSmall} 320w, ${meepoImageLarge} 480w`,
+    ...responsiveHeroImage(
+      meepoImageSmall,
+      meepoImageMedium,
+      meepoImageLarge,
+      meepoImageFull,
+    ),
   },
   {
     name: 'Tinker',
     description: tinkerDescr,
     theme: '#fcff67',
-    image: tinkerImageSmall,
-    imageSrcSet: `${tinkerImageSmall} 320w, ${tinkerImageLarge} 413w`,
+    ...responsiveHeroImage(
+      tinkerImageSmall,
+      tinkerImageMedium,
+      tinkerImageLarge,
+      tinkerImageFull,
+    ),
   },
   {
     name: 'Queen Of Pain',
     description: qopDescr,
     theme: '#ff3535',
-    image: queenOfPainImageSmall,
-    imageSrcSet: `${queenOfPainImageSmall} 480w, ${queenOfPainImageLarge} 960w`,
+    ...responsiveHeroImage(
+      queenOfPainImageSmall,
+      queenOfPainImageMedium,
+      queenOfPainImageLarge,
+      queenOfPainImageFull,
+    ),
   },
   {
     name: 'Ember Spirit',
     description: emberDescr,
     theme: '#ff701d',
-    image: emberImageSmall,
-    imageSrcSet: `${emberImageSmall} 480w, ${emberImageLarge} 693w`,
+    ...responsiveHeroImage(
+      emberImageSmall,
+      emberImageMedium,
+      emberImageLarge,
+      emberImageFull,
+    ),
   },
   {
     name: 'Puck',
     description: puckDescr,
     theme: '#2ee7ff',
-    image: puckImageSmall,
-    imageSrcSet: `${puckImageSmall} 480w, ${puckImageLarge} 960w`,
+    ...responsiveHeroImage(
+      puckImageSmall,
+      puckImageMedium,
+      puckImageLarge,
+      puckImageFull,
+    ),
   },
 ];
