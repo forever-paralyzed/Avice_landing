@@ -3,8 +3,9 @@ import Reveal from './Reveal';
 import HeroDescription from './HeroDescription';
 import { heroes } from '../data/heroes';
 import '../styles/Heroes.css';
-import tier30 from '../assets/30.webp';
-import arrow from './arrow.png';
+import tier30Small from '../assets/30-64.webp';
+import tier30Large from '../assets/30-128.webp';
+import arrow from './arrow-128.webp';
 
 type HeroThemeStyle = CSSProperties & { '--hero-theme': string };
 
@@ -95,6 +96,8 @@ function Heroes() {
                 <img
                   className="heroes-feature-image"
                   src={activeHero.image}
+                  srcSet={activeHero.imageSrcSet}
+                  sizes="(max-width: 600px) 85vw, (max-width: 800px) 60vw, (max-width: 1000px) 40vw, 35vw"
                   alt={activeHero.name}
                   loading="lazy"
                   decoding="async"
@@ -110,8 +113,12 @@ function Heroes() {
                 {activeHero.name}
                 <img
                   className="heroes-feature-tier"
-                  src={tier30}
+                  src={tier30Small}
+                  srcSet={`${tier30Small} 64w, ${tier30Large} 128w`}
+                  sizes="60px"
                   alt="Tier 30"
+                  width="60"
+                  height="60"
                   loading="lazy"
                   decoding="async"
                 />

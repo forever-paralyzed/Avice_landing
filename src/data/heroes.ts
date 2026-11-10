@@ -1,18 +1,28 @@
-import emberImage from '../assets/heroes/ember.webp';
-import invokerImage from '../assets/heroes/invo.webp';
-import meepoImage from '../assets/heroes/meepo.webp';
-import morphlingImage from '../assets/heroes/morph.webp';
-import puckImage from '../assets/heroes/puck.webp';
-import queenOfPainImage from '../assets/heroes/qop.webp';
-import shadowFiendImage from '../assets/heroes/sf.webp';
-import stormSpiritImage from '../assets/heroes/storm_spirit.webp';
-import tinkerImage from '../assets/heroes/tinker.webp';
+import emberImageSmall from '../assets/heroes/ember-480.webp';
+import emberImageLarge from '../assets/heroes/ember-693.webp';
+import invokerImageSmall from '../assets/heroes/invo-480.webp';
+import invokerImageLarge from '../assets/heroes/invo-960.webp';
+import meepoImageSmall from '../assets/heroes/meepo-320.webp';
+import meepoImageLarge from '../assets/heroes/meepo-480.webp';
+import morphlingImageSmall from '../assets/heroes/morph-480.webp';
+import morphlingImageLarge from '../assets/heroes/morph-960.webp';
+import puckImageSmall from '../assets/heroes/puck-480.webp';
+import puckImageLarge from '../assets/heroes/puck-960.webp';
+import queenOfPainImageSmall from '../assets/heroes/qop-480.webp';
+import queenOfPainImageLarge from '../assets/heroes/qop-960.webp';
+import shadowFiendImageSmall from '../assets/heroes/sf-480.webp';
+import shadowFiendImageLarge from '../assets/heroes/sf-900.webp';
+import stormSpiritImageSmall from '../assets/heroes/storm_spirit-480.webp';
+import stormSpiritImageLarge from '../assets/heroes/storm_spirit-686.webp';
+import tinkerImageSmall from '../assets/heroes/tinker-320.webp';
+import tinkerImageLarge from '../assets/heroes/tinker-413.webp';
 
 export type Hero = {
   name: string;
   description: string;
   theme: string;
   image: string | null;
+  imageSrcSet?: string;
   featured?: boolean;
 };
 
@@ -40,55 +50,64 @@ export const heroes: Hero[] = [
     name: 'Morphling',
     description: morphDescr,
     theme: '#00c3ff',
-    image: morphlingImage,
+    image: morphlingImageSmall,
+    imageSrcSet: `${morphlingImageSmall} 480w, ${morphlingImageLarge} 960w`,
     featured: true,
   },
   {
     name: 'Shadow Fiend',
     description: sfDescr,
     theme: '#530000',
-    image: shadowFiendImage,
+    image: shadowFiendImageSmall,
+    imageSrcSet: `${shadowFiendImageSmall} 480w, ${shadowFiendImageLarge} 900w`,
   },
   {
     name: 'Storm Spirit',
     description: stormDescr,
     theme: '#003de6',
-    image: stormSpiritImage,
+    image: stormSpiritImageSmall,
+    imageSrcSet: `${stormSpiritImageSmall} 480w, ${stormSpiritImageLarge} 686w`,
   },
   {
     name: 'Invoker',
     description: invoDescr,
     theme: '#fb8eff',
-    image: invokerImage,
+    image: invokerImageSmall,
+    imageSrcSet: `${invokerImageSmall} 480w, ${invokerImageLarge} 960w`,
   },
   {
     name: 'Meepo',
     description: meepoDescr,
     theme: '#6f352a',
-    image: meepoImage,
+    image: meepoImageSmall,
+    imageSrcSet: `${meepoImageSmall} 320w, ${meepoImageLarge} 480w`,
   },
   {
     name: 'Tinker',
     description: tinkerDescr,
     theme: '#fcff67',
-    image: tinkerImage,
+    image: tinkerImageSmall,
+    imageSrcSet: `${tinkerImageSmall} 320w, ${tinkerImageLarge} 413w`,
   },
   {
     name: 'Queen Of Pain',
     description: qopDescr,
     theme: '#ff3535',
-    image: queenOfPainImage,
+    image: queenOfPainImageSmall,
+    imageSrcSet: `${queenOfPainImageSmall} 480w, ${queenOfPainImageLarge} 960w`,
   },
   {
     name: 'Ember Spirit',
     description: emberDescr,
     theme: '#ff701d',
-    image: emberImage,
+    image: emberImageSmall,
+    imageSrcSet: `${emberImageSmall} 480w, ${emberImageLarge} 693w`,
   },
   {
     name: 'Puck',
     description: puckDescr,
     theme: '#2ee7ff',
-    image: puckImage,
+    image: puckImageSmall,
+    imageSrcSet: `${puckImageSmall} 480w, ${puckImageLarge} 960w`,
   },
 ];

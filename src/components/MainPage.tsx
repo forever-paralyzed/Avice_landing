@@ -2,7 +2,8 @@ import aviceFace768 from '../assets/avice_face-768.webp';
 import aviceFace1280 from '../assets/avice_face-1280.webp';
 import aviceFace2560 from '../assets/avice_face-2560.webp';
 import '../styles/MainPage.css';
-import tier30 from '../assets/30.webp';
+import tier30Small from '../assets/30-320.webp';
+import tier30Large from '../assets/30-500.webp';
 import Reveal from './Reveal';
 
 function MainPage() {
@@ -43,7 +44,14 @@ function MainPage() {
             </div>
           </Reveal>
           <Reveal className="tier30-reveal">
-            <img src={tier30} alt="30" className="tier30-image" />
+            <img
+              src={tier30Small}
+              srcSet={`${tier30Small} 320w, ${tier30Large} 500w`}
+              sizes="(max-width: 800px) 34vw, (max-width: 1100px) 18vw, 22vw"
+              alt="30"
+              className="tier30-image"
+              decoding="async"
+            />
           </Reveal>
         </div>
       </section>
