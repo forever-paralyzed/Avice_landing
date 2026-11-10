@@ -97,7 +97,7 @@ function Heroes() {
                   className="heroes-feature-image"
                   src={activeHero.image}
                   srcSet={activeHero.imageSrcSet}
-                  sizes="(max-width: 600px) 85vw, (max-width: 800px) 60vw, (max-width: 1000px) 40vw, 35vw"
+                  sizes="(max-width: 600px) calc(100vw - 38px), (max-width: 800px) 51vw, min(48vw, 614px)"
                   alt={activeHero.name}
                   loading="lazy"
                   decoding="async"
