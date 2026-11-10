@@ -1,12 +1,12 @@
-import emberImage from '../assets/heroes/ember.png';
-import invokerImage from '../assets/heroes/invo.jpg';
-import meepoImage from '../assets/heroes/meepo.jpg';
-import morphlingImage from '../assets/heroes/morph.jpg';
-import puckImage from '../assets/heroes/puck.png';
-import queenOfPainImage from '../assets/heroes/qop.jpg';
-import shadowFiendImage from '../assets/heroes/sf.png';
-import stormSpiritImage from '../assets/heroes/storm_spirit.jpg';
-import tinkerImage from '../assets/heroes/tinker.png';
+import emberImage from '../assets/heroes/ember.webp';
+import invokerImage from '../assets/heroes/invo.webp';
+import meepoImage from '../assets/heroes/meepo.webp';
+import morphlingImage from '../assets/heroes/morph.webp';
+import puckImage from '../assets/heroes/puck.webp';
+import queenOfPainImage from '../assets/heroes/qop.webp';
+import shadowFiendImage from '../assets/heroes/sf.webp';
+import stormSpiritImage from '../assets/heroes/storm_spirit.webp';
+import tinkerImage from '../assets/heroes/tinker.webp';
 
 export type Hero = {
   name: string;

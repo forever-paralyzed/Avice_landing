@@ -1,6 +1,8 @@
-import aviceFace from '../assets/avice_face.png';
+import aviceFace768 from '../assets/avice_face-768.webp';
+import aviceFace1280 from '../assets/avice_face-1280.webp';
+import aviceFace2560 from '../assets/avice_face-2560.webp';
 import '../styles/MainPage.css';
-import tier30 from '../assets/30.png';
+import tier30 from '../assets/30.webp';
 import Reveal from './Reveal';
 
 function MainPage() {
@@ -8,7 +10,16 @@ function MainPage() {
     <main>
       <section className="mainPage">
         <div className="mainPage-image">
-          <img src={aviceFace} alt="avice" />
+          <img
+            src={aviceFace1280}
+            srcSet={`${aviceFace768} 768w, ${aviceFace1280} 1280w, ${aviceFace2560} 2560w`}
+            sizes="(max-width: 800px) 100vw, 65vw"
+            alt="avice"
+            width="5840"
+            height="2916"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
         <div className="mainPage-ribbon" />
         <div className="mainPage-stripe" />

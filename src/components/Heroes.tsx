@@ -3,7 +3,7 @@ import Reveal from './Reveal';
 import HeroDescription from './HeroDescription';
 import { heroes } from '../data/heroes';
 import '../styles/Heroes.css';
-import tier30 from '../assets/30.png';
+import tier30 from '../assets/30.webp';
 import arrow from './arrow.png';
 
 type HeroThemeStyle = CSSProperties & { '--hero-theme': string };
@@ -96,6 +96,8 @@ function Heroes() {
                   className="heroes-feature-image"
                   src={activeHero.image}
                   alt={activeHero.name}
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div className="heroes-feature-art" aria-hidden="true">
@@ -110,6 +112,8 @@ function Heroes() {
                   className="heroes-feature-tier"
                   src={tier30}
                   alt="Tier 30"
+                  loading="lazy"
+                  decoding="async"
                 />
               </h3>
 
@@ -128,7 +132,13 @@ function Heroes() {
               aria-controls="heroes-slide"
               onClick={showPreviousHero}
             >
-              <img className="heroes-arrow-image" src={arrow} alt="" />
+              <img
+                className="heroes-arrow-image"
+                src={arrow}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </button>
             <button
               className="heroes-arrow heroes-arrow--next"
@@ -137,7 +147,13 @@ function Heroes() {
               aria-controls="heroes-slide"
               onClick={showNextHero}
             >
-              <img className="heroes-arrow-image" src={arrow} alt="" />
+              <img
+                className="heroes-arrow-image"
+                src={arrow}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </button>
           </article>
           <div className="heroes-dots" aria-label="Выбор слайда">

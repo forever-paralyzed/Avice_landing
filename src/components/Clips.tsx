@@ -1,8 +1,8 @@
 import '../styles/Clips.css';
-import clip1avce from '../assets/clips/clip1.jpg';
-import clip2avce from '../assets/clips/clip2.jpg';
-import clip3avce from '../assets/clips/clip3.jpg';
-import twitch from '../assets/twitch.png';
+import clip1avce from '../assets/clips/clip1.webp';
+import clip2avce from '../assets/clips/clip2.webp';
+import clip3avce from '../assets/clips/clip3.webp';
+import twitch from '../assets/twitch.webp';
 
 function Clips() {
   const clips = [
@@ -38,8 +38,8 @@ function Clips() {
             target="_blank"
             rel="noreferrer"
           >
-            <img className="clip-card-preview" src={clip.preview} alt="" />
-            <img className="clip-platform-image" src={twitch} alt="Twitch" />
+            <img className="clip-card-preview" src={clip.preview} alt="" loading="lazy" decoding="async" />
+            <img className="clip-platform-image" src={twitch} alt="Twitch" loading="lazy" decoding="async" />
             <span className="clip-play" aria-hidden="true" />
             <h3 className="clip-card-title">{clip.title}</h3>
           </a>

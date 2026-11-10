@@ -1,5 +1,5 @@
 import '../styles/AviceHeader.css';
-import tier30 from '../assets/30.png';
+import tier30 from '../assets/30.webp';
 
 function Header() {
   return (

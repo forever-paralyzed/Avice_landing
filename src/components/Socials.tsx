@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react';
-import twitchLogo from '../assets/twitch.png';
+import twitchLogo from '../assets/twitch.webp';
 import '../styles/Socials.css';
-import avicePFP from '../assets/avicepfp.png';
-import tg from '../assets/tg.png';
-import uTube from '../assets/uTube.png';
-import vk from '../assets/vk.png';
-import macanPic from '../assets/macan.jpg';
+import avicePFP from '../assets/avicepfp.webp';
+import tg from '../assets/tg.webp';
+import uTube from '../assets/uTube.webp';
+import vk from '../assets/vk.webp';
+import macanPic from '../assets/macan.webp';
 
 type Social = {
   name: string;
@@ -49,8 +49,8 @@ function Socials() {
       <div className="socials-content">
         <h2 id="socials-title">Соцсети Артема</h2>
         <div className="avice-pfp">
-          <img src={avicePFP} alt="" />
-          <img src={macanPic} alt="" className="macan" />
+          <img src={avicePFP} alt="" loading="lazy" decoding="async" />
+          <img src={macanPic} alt="" className="macan" loading="lazy" decoding="async" />
         </div>
 
         <div className="socials-grid">
@@ -65,7 +65,7 @@ function Socials() {
               title={social.name}
               style={{ '--social-accent': social.accent } as SocialAccentStyle}
             >
-              <img src={social.icon} alt="" />
+              <img src={social.icon} alt="" loading="lazy" decoding="async" />
             </a>
           ))}
         </div>

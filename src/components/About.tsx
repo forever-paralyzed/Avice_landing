@@ -1,12 +1,12 @@
 import '../styles/About.css';
 import Reveal from './Reveal';
-import cs30cherep from '../assets/cs30cherep.png';
+import cs30cherep from '../assets/cs30cherep.webp';
 
 function About() {
   return (
     <section className="about" id="about">
       <div className="about-image">
-        <img src={cs30cherep} alt="" />
+        <img src={cs30cherep} alt="" loading="lazy" decoding="async" />
       </div>
       <div className="about-ribbon" />
       <div className="about-stripe" />

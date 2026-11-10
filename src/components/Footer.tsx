@@ -1,4 +1,4 @@
-import tier30 from '../assets/30.png';
+import tier30 from '../assets/30.webp';
 import '../styles/Footer.css';
 
 function Footer() {
@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <a className="footer-brand" href="#" aria-label="avice — наверх">
         <span>avice</span>
-        <img src={tier30} alt="" />
+        <img src={tier30} alt="" loading="lazy" decoding="async" />
       </a>
       <p className="footer-caption">Народный Twitch-стример</p>
       <span className="footer-copyright">
