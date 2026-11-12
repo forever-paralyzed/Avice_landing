@@ -74,43 +74,43 @@ function Heroes() {
   }, []);
 
   useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel || !('IntersectionObserver' in window)) return;
+    const startBackgroundPreload = () => {
+      const connection = (
+        navigator as Navigator & { connection?: { saveData?: boolean } }
+      ).connection;
+      if (connection?.saveData) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
+      const pendingImages: HTMLImageElement[] = [];
 
-        const pendingImages: HTMLImageElement[] = [];
+      heroes.forEach((hero) => {
+        if (!hero.image || !hero.imageSrcSet) return;
 
-        heroes.forEach((hero) => {
-          if (!hero.image || !hero.imageSrcSet) return;
+        const image = new Image();
+        const releaseImage = () => {
+          image.onload = null;
+          image.onerror = null;
+          const index = pendingImages.indexOf(image);
+          if (index !== -1) pendingImages.splice(index, 1);
+        };
 
-          const image = new Image();
-          const releaseImage = () => {
-            image.onload = null;
-            image.onerror = null;
-            const index = pendingImages.indexOf(image);
-            if (index !== -1) pendingImages.splice(index, 1);
-          };
+        image.decoding = 'async';
+        image.fetchPriority = 'low';
+        image.sizes = HERO_IMAGE_SIZES;
+        image.srcset = hero.imageSrcSet;
+        image.onload = releaseImage;
+        image.onerror = releaseImage;
+        pendingImages.push(image);
+        image.src = hero.image;
+      });
+    };
 
-          image.decoding = 'async';
-          image.fetchPriority = 'low';
-          image.sizes = HERO_IMAGE_SIZES;
-          image.srcset = hero.imageSrcSet;
-          image.onload = releaseImage;
-          image.onerror = releaseImage;
-          pendingImages.push(image);
-          image.src = hero.image;
-        });
+    if (document.readyState === 'complete') {
+      startBackgroundPreload();
+      return;
+    }
 
-        observer.disconnect();
-      },
-      { rootMargin: '700px 0px' },
-    );
-
-    observer.observe(carousel);
-    return () => observer.disconnect();
+    window.addEventListener('load', startBackgroundPreload, { once: true });
+    return () => window.removeEventListener('load', startBackgroundPreload);
   }, []);
 
   return (
