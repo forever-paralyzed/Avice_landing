@@ -64,7 +64,18 @@ function Clips() {
               loading="lazy"
               decoding="async"
             />
-            <span className="clip-play" aria-hidden="true" />
+            <span className="clip-hover-action" aria-hidden="true">
+              <img
+                className="clip-hover-twitch"
+                src={twitch}
+                alt=""
+                width="128"
+                height="128"
+                loading="lazy"
+                decoding="async"
+              />
+              <span className="clip-hover-label">Смотреть клип на Twitch</span>
+            </span>
             <h3 className="clip-card-title">{clip.title}</h3>
           </a>
         ))}

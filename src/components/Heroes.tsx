@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import Reveal from './Reveal';
 import HeroDescription from './HeroDescription';
-import { heroes } from '../data/heroes';
+import { heroes, type Hero } from '../data/heroes';
 import '../styles/Heroes.css';
 import tier30Small from '../assets/30-64.webp';
 import tier30Large from '../assets/30-128.webp';
@@ -15,25 +15,21 @@ const HERO_IMAGE_SIZES =
 function Heroes() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<'next' | 'previous'>(
-    'next',
-  );
-  const [hasChangedSlide, setHasChangedSlide] = useState(false);
+  const [outgoingHero, setOutgoingHero] = useState<Hero | null>(null);
   const activeHero = heroes[activeIndex];
 
-  const selectHero = (index: number, direction: 'next' | 'previous') => {
+  const selectHero = (index: number) => {
     if (index === activeIndex) return;
 
-    setSlideDirection(direction);
-    setHasChangedSlide(true);
+    setOutgoingHero(activeHero);
     setActiveIndex(index);
   };
 
   const showPreviousHero = () => {
-    selectHero((activeIndex - 1 + heroes.length) % heroes.length, 'previous');
+    selectHero((activeIndex - 1 + heroes.length) % heroes.length);
   };
   const showNextHero = () => {
-    selectHero((activeIndex + 1) % heroes.length, 'next');
+    selectHero((activeIndex + 1) % heroes.length);
   };
 
   useEffect(() => {
@@ -59,19 +55,16 @@ function Heroes() {
       if (!isVisible) return;
 
       event.preventDefault();
-      setHasChangedSlide(true);
       if (event.key === 'ArrowLeft') {
-        setSlideDirection('previous');
-        setActiveIndex((index) => (index - 1 + heroes.length) % heroes.length);
+        showPreviousHero();
       } else {
-        setSlideDirection('next');
-        setActiveIndex((index) => (index + 1) % heroes.length);
+        showNextHero();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [activeIndex]);
 
   useEffect(() => {
     const startBackgroundPreload = () => {
@@ -113,6 +106,16 @@ function Heroes() {
     return () => window.removeEventListener('load', startBackgroundPreload);
   }, []);
 
+  const slideLayers: {
+    hero: Hero;
+    state: 'outgoing' | 'incoming' | 'active';
+  }[] = [
+    ...(outgoingHero
+      ? [{ hero: outgoingHero, state: 'outgoing' as const }]
+      : []),
+    { hero: activeHero, state: outgoingHero ? 'incoming' : 'active' },
+  ];
+
   return (
     <section className="heroes" id="heroes" aria-labelledby="heroes-title">
       <Reveal className="heroes-content">
@@ -126,55 +129,63 @@ function Heroes() {
           tabIndex={0}
         >
           <article
-            key={activeHero.name}
             id="heroes-slide"
-            className={`heroes-feature${hasChangedSlide ? ` heroes-feature--${slideDirection}` : ''}${activeHero.description.length > 220 ? ' heroes-feature--long-description' : ''}`}
-            style={{ '--hero-theme': activeHero.theme } as HeroThemeStyle}
+            className="heroes-feature"
             role="group"
             aria-roledescription="слайд"
             aria-label={`${activeIndex + 1} из ${heroes.length}: ${activeHero.name}`}
           >
-            <div className="heroes-feature-visual">
-              {activeHero.image ? (
-                <img
-                  className="heroes-feature-image"
-                  src={activeHero.image}
-                  srcSet={activeHero.imageSrcSet}
-                  sizes={HERO_IMAGE_SIZES}
-                  alt={activeHero.name}
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <div className="heroes-feature-art" aria-hidden="true">
-                  <span>{activeHero.name.charAt(0)}</span>
+            {slideLayers.map(({ hero, state }) => (
+              <div
+                key={hero.name}
+                className={`heroes-feature-slide${state !== 'active' ? ` heroes-feature-slide--${state}` : ''}${hero.description.length > 220 ? ' heroes-feature--long-description' : ''}`}
+                style={{ '--hero-theme': hero.theme } as HeroThemeStyle}
+                aria-hidden={state === 'outgoing'}
+                onAnimationEnd={
+                  state === 'incoming' ? () => setOutgoingHero(null) : undefined
+                }
+              >
+                <div className="heroes-feature-visual">
+                  {hero.image ? (
+                    <img
+                      className="heroes-feature-image"
+                      src={hero.image}
+                      srcSet={hero.imageSrcSet}
+                      sizes={HERO_IMAGE_SIZES}
+                      alt={hero.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="heroes-feature-art" aria-hidden="true">
+                      <span>{hero.name.charAt(0)}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            <div className="heroes-feature-copy">
-              <h3>
-                {activeHero.name}
-                <img
-                  className="heroes-feature-tier"
-                  src={tier30Small}
-                  srcSet={`${tier30Small} 64w, ${tier30Large} 128w`}
-                  sizes="60px"
-                  alt="Tier 30"
-                  width="60"
-                  height="60"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </h3>
+                <div className="heroes-feature-copy">
+                  <h3>
+                    {hero.name}
+                    <img
+                      className="heroes-feature-tier"
+                      src={tier30Small}
+                      srcSet={`${tier30Small} 64w, ${tier30Large} 128w`}
+                      sizes="60px"
+                      alt="Tier 30"
+                      width="60"
+                      height="60"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </h3>
 
-              <p className="heroes-feature-label">
-                {activeHero.featured
-                  ? 'Сигнатурный герой avice'
-                  : 'Герой Dota 2'}
-              </p>
+                  <p className="heroes-feature-label">
+                    {hero.featured ? 'Сигнатурный герой avice' : 'Герой Dota 2'}
+                  </p>
 
-              <HeroDescription description={activeHero.description} />
-            </div>
+                  <HeroDescription description={hero.description} />
+                </div>
+              </div>
+            ))}
             <button
               className="heroes-arrow heroes-arrow--previous"
               type="button"
@@ -214,9 +225,7 @@ function Heroes() {
                 type="button"
                 aria-label={`Показать слайд ${index + 1}: ${hero.name}`}
                 aria-pressed={index === activeIndex}
-                onClick={() =>
-                  selectHero(index, index > activeIndex ? 'next' : 'previous')
-                }
+                onClick={() => selectHero(index)}
               />
             ))}
           </div>

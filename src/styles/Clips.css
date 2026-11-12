@@ -59,8 +59,11 @@
 
 .clip-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(191, 148, 255, 0.65);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28);
+  border-color: var(--primary-light);
+  box-shadow:
+    0 0 0 1px var(--primary-light),
+    0 0 28px color-mix(in srgb, var(--primary-light) 55%, transparent),
+    0 14px 36px rgba(0, 0, 0, 0.28);
 }
 
 .clip-card-preview {
@@ -101,51 +104,72 @@
   height: 42px;
   place-items: center;
   box-sizing: border-box;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 12px;
-  background: rgba(20, 12, 31, 0.82);
+  border-radius: 10px;
+  background: #fff;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
   object-fit: contain;
   padding: 7px;
+  transition: opacity 180ms ease;
 }
 
-.clip-play {
+.clip-hover-action {
   position: absolute;
   z-index: 2;
   top: 50%;
   left: 50%;
-  display: grid;
-  width: 64px;
-  height: 64px;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  background: rgba(145, 70, 255, 0.84);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.36);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: calc(100% - 36px);
+  text-align: center;
   opacity: 0;
-  transform: translate(-50%, -42%) scale(0.9);
+  transform: translate(-50%, -42%) scale(0.94);
   transition:
     opacity 200ms ease,
     transform 200ms ease;
+  pointer-events: none;
 }
 
-.clip-play::before {
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 15px solid #fff;
-  content: '';
+.clip-hover-twitch {
+  display: block;
+  width: 58px;
+  height: 58px;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 10px;
+  background: #fff;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px var(--primary-light));
 }
 
-.clip-card:hover .clip-play,
-.clip-card:focus-visible .clip-play {
+.clip-hover-label {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+  white-space: nowrap;
+}
+
+.clip-card:hover .clip-hover-action,
+.clip-card:focus-visible .clip-hover-action {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
 }
 
+.clip-card:hover .clip-platform-image,
+.clip-card:focus-visible .clip-platform-image {
+  opacity: 0;
+}
+
 .clip-card:focus-visible {
+  border-color: var(--primary-light);
+  box-shadow:
+    0 0 0 2px var(--primary-light),
+    0 0 28px color-mix(in srgb, var(--primary-light) 55%, transparent),
+    0 14px 36px rgba(0, 0, 0, 0.28);
   outline: 2px solid var(--primary-light);
   outline-offset: 4px;
 }
