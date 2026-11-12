@@ -9,6 +9,9 @@ import arrow from './arrow-128.webp';
 
 type HeroThemeStyle = CSSProperties & { '--hero-theme': string };
 
+const HERO_IMAGE_SIZES =
+  '(max-width: 600px) calc(100vw - 36px), (max-width: 800px) 54vw, (max-width: 1328px) 48vw, 614px';
+
 function Heroes() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -70,6 +73,46 @@ function Heroes() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        const pendingImages: HTMLImageElement[] = [];
+
+        heroes.forEach((hero) => {
+          if (!hero.image || !hero.imageSrcSet) return;
+
+          const image = new Image();
+          const releaseImage = () => {
+            image.onload = null;
+            image.onerror = null;
+            const index = pendingImages.indexOf(image);
+            if (index !== -1) pendingImages.splice(index, 1);
+          };
+
+          image.decoding = 'async';
+          image.fetchPriority = 'low';
+          image.sizes = HERO_IMAGE_SIZES;
+          image.srcset = hero.imageSrcSet;
+          image.onload = releaseImage;
+          image.onerror = releaseImage;
+          pendingImages.push(image);
+          image.src = hero.image;
+        });
+
+        observer.disconnect();
+      },
+      { rootMargin: '700px 0px' },
+    );
+
+    observer.observe(carousel);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="heroes" id="heroes" aria-labelledby="heroes-title">
       <Reveal className="heroes-content">
@@ -97,7 +140,7 @@ function Heroes() {
                   className="heroes-feature-image"
                   src={activeHero.image}
                   srcSet={activeHero.imageSrcSet}
-                  sizes="(max-width: 600px) calc(100vw - 36px), (max-width: 800px) 54vw, (max-width: 1328px) 48vw, 614px"
+                  sizes={HERO_IMAGE_SIZES}
                   alt={activeHero.name}
                   loading="lazy"
                   decoding="async"
